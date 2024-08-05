@@ -1,8 +1,8 @@
 // App.jsx (modificado)
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import Destino from './Destino';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Destino from './components/Destino';
 
 function App() {
   const destinos = [
