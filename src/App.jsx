@@ -1,9 +1,9 @@
 // App.jsx (modificado)
 import React, { useState } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import Destino from './Destino';
-import FormDestino from './FormDestino';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Destino from './components/Destino';
+import FormDestino from './components/FormDestino';
 
 function App() {
   const [destinos, setDestinos] = useState([
