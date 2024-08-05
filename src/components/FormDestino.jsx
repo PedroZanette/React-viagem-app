@@ -19,13 +19,13 @@ const FormDestino = ({ adicionarDestino }) => {
         placeholder="Nome do destino"
         value={nome}
         onChange={(e) => setNome(e.target.value)}
-      />
+      /> &nbsp;
       <input
         type="text"
         placeholder="Descrição"
         value={descricao}
         onChange={(e) => setDescricao(e.target.value)}
-      />
+      /> <br />  
       <button type="submit">Adicionar Destino</button>
     </form>
   );
