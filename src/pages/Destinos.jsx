@@ -1,5 +1,5 @@
 // Destinos.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Destino from '../components/Destinos/Destino';
 import FormDestino from '../components/Destinos/FormDestino';
 
@@ -18,6 +18,41 @@ const Destinos = () => {
     { nome: 'Pequim', descricao: 'A capital da China.', distancia: 17856 }
   ]);
 
+  const [dataIda, setDataIda] = useState('');
+  const [dataVolta, setDataVolta] = useState('');
+  const [tipoEstalagem, setTipoEstalagem] = useState('padrão');
+  const [participantes, setParticipantes] = useState(1);
+  const [subtotal, setSubtotal] = useState(0);
+  const [destino, setDestino] = useState(null)
+ 
+
+  useEffect(() => {
+    if (destino && dataIda && dataVolta) {
+      const custo = calcularCustos(destino.distancia, dataIda, dataVolta, tipoEstalagem, participantes);
+      setSubtotal(custo);
+    }
+  }, [destino, dataIda, dataVolta, tipoEstalagem, participantes]);
+
+  const calcularCustos = (distancia, dataIda, dataVolta, tipoEstalagem, participantes) => {
+    const hoje = new Date();
+    const ida = new Date(dataIda);
+    const volta = new Date(dataVolta);
+    const diasEstadia = (volta - ida) / (1000 * 60 * 60 * 24);
+    const semanasEstadia = Math.ceil(diasEstadia / 7);
+
+    let custoVoo = distancia > 2000 ? 2 * 1500 : 1500;
+    // if ((ida - hoje) < (2 * 30 * 24 * 60 * 60 * 1000)) {
+    //   custoVoo = 1500;
+    // }
+    if (distancia > 2000) {
+      custoVoo += (distancia - 2000);
+    }
+
+    const custoEstalagem = tipoEstalagem === 'luxo' ? 700 : 400;
+    const custoTotalEstalagem = semanasEstadia * custoEstalagem * (1 + (participantes - 1) * 0.25);
+    return custoVoo + custoTotalEstalagem;
+  };
+
   const adicionarDestino = (novoDestino) => {
     setDestinos([...destinos, novoDestino]);
   };
@@ -25,11 +60,26 @@ const Destinos = () => {
   return (
     <div className="App">
       <div><h2>Destinos</h2><p>Veja nossos destinos incríveis.</p></div>
+      <label>Data de Ida:
+        <input type="date" value={dataIda} onChange={(e) => setDataIda(e.target.value)} />
+      </label>
+      <label>Data de Volta:
+        <input type="date" value={dataVolta} onChange={(e) => setDataVolta(e.target.value)} />
+      </label>
+      <label>Tipo de Estalagem:
+        <select value={tipoEstalagem} onChange={(e) => setTipoEstalagem(e.target.value)}>
+          <option value="padrão">Padrão</option>
+          <option value="luxo">Luxo</option>
+        </select>
+      </label>
+      <label>Número de Participantes:
+        <input type="number" value={participantes} onChange={(e) => setParticipantes(e.target.value)} min="1" />
+      </label>
+      <h3>Subtotal: R${subtotal}</h3>
       <FormDestino adicionarDestino={adicionarDestino} />
       {destinos.map((destino, index) => (
-        <Destino key={index} nome={destino.nome} descricao={destino.descricao} distancia={destino.distancia} />
+        <Destino key={index} destino={destino} setDestino={setDestino}/>
       ))}
-
     </div>
   );
 };
