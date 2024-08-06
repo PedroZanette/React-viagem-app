@@ -4,12 +4,14 @@ import React, { useState } from 'react';
 const FormDestino = ({ adicionarDestino }) => {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
+  const [distancia, setDistancia] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    adicionarDestino({ nome, descricao });
+    adicionarDestino({ nome, descricao, distancia });
     setNome('');
     setDescricao('');
+    setDistancia(0);
   };
 
   return (
@@ -25,7 +27,13 @@ const FormDestino = ({ adicionarDestino }) => {
         placeholder="Descrição"
         value={descricao}
         onChange={(e) => setDescricao(e.target.value)}
-      /> <br />  
+      /> &nbsp;
+      <input
+      type="text"
+      placeholder="Distância"
+      value={distancia}
+      onChange={(e) => setDistancia(e.target.value)}
+    /><br />  
       <button type="submit">Adicionar Destino</button>
     </form>
   );
