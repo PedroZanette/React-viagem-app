@@ -59,7 +59,7 @@ const Destinos = () => {
 
   return (
     <div className="App">
-      <div><h2>Destinos</h2><p>Veja nossos destinos incríveis.</p></div>
+      <div><h2>{ destino ? <p> Viagem para: {destino.nome}</p> : <p>Escolha um destino</p>}</h2></div>
       <label>Data de Ida:
         <input type="date" value={dataIda} onChange={(e) => setDataIda(e.target.value)} />
       </label>
