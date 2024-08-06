@@ -1,10 +1,10 @@
 // App.jsx
 import React, { useState } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import Destinos from './components/Destinos';
-import Contato from './components/Contato';
+import Header from './components/Main/Header';
+import Footer from './components/Main/Footer';
+import Home from './pages/Home';
+import Destinos from './pages/Destinos';
+import Contato from './pages/Contato';
 import './App.css';
 
 function App() {
