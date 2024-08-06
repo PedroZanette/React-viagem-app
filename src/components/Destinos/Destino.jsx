@@ -7,7 +7,7 @@ const Destino = ({ nome, descricao, distancia }) => {
     <div className="destino">
       <h2>{nome}</h2>
       <p>{descricao}</p>
-      <p>Distância: {distancia} km</p>
+      <p><strong>Distância: {distancia} km</strong></p>
     </div>
   );
 };

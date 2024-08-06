@@ -4,7 +4,7 @@ import Destino from '../components/Destinos/Destino';
 import FormDestino from '../components/Destinos/FormDestino';
 
 const Destinos = () => {
-
+  // distancia em quilometros
   const [destinos, setDestinos] = useState([
     { nome: 'Paris', descricao: 'A cidade do amor.', distancia: 9377 },
     { nome: 'Nova York', descricao: 'A cidade que nunca dorme.', distancia: 7681 },
